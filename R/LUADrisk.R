@@ -11,7 +11,6 @@
 LUADrisk <- function(genes_expr, parallel = 1){
   checkmate::assert_matrix(genes_expr)
   options(warn=-1)
-  load("~/lungcancer/package/LUADrisk/R/sysdata.rda")
   genes <- rownames(genes_expr)
   if(TRUE %in% (genes %in% gene_list)){
     genes_expr <- genes_expr[intersect(gene_list, genes),]
