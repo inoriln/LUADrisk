@@ -18,5 +18,6 @@ This is a basic example which shows you how to solve a common problem:
 library(LUADrisk)
 ## basic example code
 #GSE31210
+data("genes_expr")
 Sample_risk <- LUADrisk(genes_expr)
 ```
