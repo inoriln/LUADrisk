@@ -7,7 +7,7 @@ The goal of LUADrisk is to evaluate lung adenocarcinoma survival risk.
 You can install the released version of LUADrisk from [Github](https://github.com/) with:
 
 ``` r
-install.packages("LUADrisk")
+install_github("inoriln/LUADrisk")
 ```
 
 ## Example
