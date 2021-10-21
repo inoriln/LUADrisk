@@ -1,0 +1,24 @@
+
+LUADrisk <- function(genes_expr, parallel = 1){
+  options(warn=-1)
+  checkmate::assert_matrix(genes_expr)
+  gene_list <- readRDS("~/lungcancer/result/signature_test/gene_list.RDS")
+  signature_TCGA <- readRDS("~/lungcancer/result/signature_test/signature_TCGA.RDS")
+  res_select <- readRDS("/home/data/gmb44/lungcancer/result/coxsvm/res_final_signature.RDS")
+  TCGA_gene <- readRDS("~/lungcancer/result/signature_test/TCGA_gene.RDS")
+  
+  genes <- rownames(genes_expr)
+  if(TRUE %in% (genes %in% gene_list)){
+    genes_expr <- genes_expr[intersect(gene_list, genes),]
+    res_es <- GSVA::gsva(genes_expr, res_select, mx.diff=T, verbose=T, method="gsva", parallel.sz=parallel)
+    signature <- as.matrix(t(res_es)) %*% as.matrix(TCGA_gene$beta)
+    res_es <- as.data.frame(t(res_es))
+    res_es$Signature_Score <- signature
+    res_es$Risk <- ifelse(signature > median(signature_TCGA),"High","Low")
+    res_es <- res_es %>% 
+      select("Risk","Signature_Score", everything())
+    return(res_es)
+  }else{
+    stop("Error: Please check the matrix. Rownames of the input matrix are genes, and colnames of the input matrix are sample names")
+  }
+}

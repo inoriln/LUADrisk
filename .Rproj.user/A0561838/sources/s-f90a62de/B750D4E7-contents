@@ -1,0 +1,42 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# LUADrisk
+
+<!-- badges: start -->
+<!-- badges: end -->
+
+The goal of LUADrisk is to evaluate lung adenocarcinoma survival risk.
+
+## Installation
+
+You can install the released version of LUADrisk from [Github](https://github.com/) with:
+
+``` r
+install.packages("LUADrisk")
+```
+
+## Example
+
+This is a basic example which shows you how to solve a common problem:
+
+```{r example}
+library(LUADrisk)
+## basic example code
+#GSE31210
+Sample_risk <- LUADrisk(genes_expr)
+```
+
+
